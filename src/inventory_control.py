@@ -22,6 +22,11 @@ class InventoryControl:
         }
 
     def add_new_order(self, customer, order, day):
+        available_dishes = self.get_available_dishes()
+
+        if order not in available_dishes:
+            return False
+
         for ingredient in self.INGREDIENTS[order]:
             if ingredient not in self.__consumed_ingredients:
                 self.__consumed_ingredients[ingredient] = 1
