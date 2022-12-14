@@ -46,10 +46,23 @@ def get_dish_most_ordered_by_maria(orders_list):
     return dish_most_ordered
 
 
+def get_arnaldo_hamburger_orders_quantity(orders_list):
+    counter = 0
+
+    for order in orders_list:
+        if order['cliente'] == 'arnaldo' and order['pedido'] == 'hamburguer':
+            counter += 1
+
+    return counter
+
+
 def analyze_log(path_to_file):
     orders_list = get_orders_list(path_to_file)
 
     dish_most_ordered_by_maria = get_dish_most_ordered_by_maria(orders_list)
+    arnaldo_hamburger_orders_quantity = (
+        get_arnaldo_hamburger_orders_quantity(orders_list))
 
     with open('data/mkt_campaign.txt', 'w') as file:
         file.write(f"{dish_most_ordered_by_maria}\n")
+        file.write(f"{arnaldo_hamburger_orders_quantity}\n")
