@@ -13,8 +13,8 @@ class TrackOrders:
         })
 
     def get_most_ordered_dish_per_customer(self, customer):
-        dishes = dict()
         orders_list = self.__orders_list
+        dishes = dict()
         dish_most_ordered = orders_list[0]['pedido']
         amount_dish_most_ordered = 0
 
@@ -34,8 +34,8 @@ class TrackOrders:
         return dish_most_ordered
 
     def get_never_ordered_per_customer(self, customer):
-        dishes = set()
         orders_list = self.__orders_list
+        dishes = set()
         customer_dishes = set()
 
         for order in orders_list:
@@ -46,7 +46,16 @@ class TrackOrders:
         return dishes.difference(customer_dishes)
 
     def get_days_never_visited_per_customer(self, customer):
-        pass
+        orders_list = self.__orders_list
+        days = set()
+        customer_days = set()
+
+        for order in orders_list:
+            days.add(order['dia'])
+            if order['cliente'] == customer:
+                customer_days.add(order['dia'])
+
+        return days.difference(customer_days)
 
     def get_busiest_day(self):
         pass
