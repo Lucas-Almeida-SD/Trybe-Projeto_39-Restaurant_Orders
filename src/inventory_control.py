@@ -21,17 +21,20 @@ class InventoryControl:
             ingredient: 0 for ingredient in self.MINIMUM_INVENTORY
         }
 
+    def update_consumed_ingredients(self, order):
+        for ingredient in self.INGREDIENTS[order]:
+            if ingredient not in self.__consumed_ingredients:
+                self.__consumed_ingredients[ingredient] = 1
+            else:
+                self.__consumed_ingredients[ingredient] += 1
+
     def add_new_order(self, customer, order, day):
         available_dishes = self.get_available_dishes()
 
         if order not in available_dishes:
             return False
 
-        for ingredient in self.INGREDIENTS[order]:
-            if ingredient not in self.__consumed_ingredients:
-                self.__consumed_ingredients[ingredient] = 1
-            else:
-                self.__consumed_ingredients[ingredient] += 1
+        self.update_consumed_ingredients(order)
 
         self.__orders_list.append({
             "cliente": customer,
