@@ -15,7 +15,7 @@ class TrackOrders:
     def get_most_ordered_dish_per_customer(self, customer):
         orders_list = self.__orders_list
         dishes = dict()
-        dish_most_ordered = orders_list[0]['pedido']
+        dish_most_ordered = ''
         amount_dish_most_ordered = 0
 
         for order in orders_list:
