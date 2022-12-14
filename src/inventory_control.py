@@ -35,4 +35,11 @@ class InventoryControl:
         })
 
     def get_quantities_to_buy(self):
-        pass
+        quantities_to_buy = dict()
+
+        for ingredient in self.MINIMUM_INVENTORY:
+            amount_consumed_ingredients = self.__consumed_ingredients[
+                ingredient]
+            quantities_to_buy[ingredient] = amount_consumed_ingredients
+
+        return quantities_to_buy
