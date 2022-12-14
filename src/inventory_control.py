@@ -43,3 +43,20 @@ class InventoryControl:
             quantities_to_buy[ingredient] = amount_consumed_ingredients
 
         return quantities_to_buy
+
+    def get_available_dishes(self):
+        available_dishes = set()
+        remaining_ingredients = set()
+
+        for ingredient in self.MINIMUM_INVENTORY:
+            amount_minimum_inventory = self.MINIMUM_INVENTORY[ingredient]
+            amount_consumed_ingredient = self.__consumed_ingredients[
+                ingredient]
+            if amount_minimum_inventory - amount_consumed_ingredient > 0:
+                remaining_ingredients.add(ingredient)
+
+        for dish in self.INGREDIENTS:
+            if set(self.INGREDIENTS[dish]).issubset(remaining_ingredients):
+                available_dishes.add(dish)
+
+        return available_dishes
