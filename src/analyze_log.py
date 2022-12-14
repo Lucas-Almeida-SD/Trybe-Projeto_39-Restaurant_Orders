@@ -68,6 +68,18 @@ def get_dishes_that_joao_never_ordered(orders_list):
     return dishes.difference(joao_dishes)
 
 
+def get_days_that_joao_never_went_to_the_cafeteria(orders_list):
+    days = set()
+    joao_days = set()
+
+    for order in orders_list:
+        days.add(order['dia'])
+        if order['cliente'] == 'joao':
+            joao_days.add(order['dia'])
+
+    return days.difference(joao_days)
+
+
 def analyze_log(path_to_file):
     orders_list = get_orders_list(path_to_file)
 
@@ -76,8 +88,11 @@ def analyze_log(path_to_file):
         get_arnaldo_hamburger_orders_quantity(orders_list))
     dishes_that_joao_never_ordered = (
         get_dishes_that_joao_never_ordered(orders_list))
+    days_that_joao_never_went_to_the_cafeteria = (
+        get_days_that_joao_never_went_to_the_cafeteria(orders_list))
 
     with open('data/mkt_campaign.txt', 'w') as file:
         file.write(f"{dish_most_ordered_by_maria}\n")
         file.write(f"{arnaldo_hamburger_orders_quantity}\n")
         file.write(f"{dishes_that_joao_never_ordered}\n")
+        file.write(f"{days_that_joao_never_went_to_the_cafeteria}")
